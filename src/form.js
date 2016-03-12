@@ -10,14 +10,14 @@ class Form extends Element {
 		resetBtn: "Reset",	
 	};
 
-	_render() {
+	_render(el, attrs) {
 		let submit = this.props.submitBtn ? <input type="submit" value={this.props.submitBtn} /> : null;
 		let reset = this.props.resetBtn ? <input type="button" value={this.props.resetBtn} /> : null;
 		let buttons = (!submit && !reset) ? null : <fieldset>{reset}{submit}</fieldset>;
 		let label = this.props.label ? <h3 className="form-label">{this.props.label}</h3> : null;
 
 		return (
-			<form>
+			<form {...attrs}>
 				{label}
 				{this.props.children}
 				{buttons}

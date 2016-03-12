@@ -50,12 +50,8 @@ class Element extends React.Component {
     return {};
   }
 
-  _buildAttributes() {
-    
-  }
-
   render() {
-    return this.renderFunc(this);
+    return this.renderFunc(this, this.buildAttributes());
   }
 }
 

@@ -40,12 +40,12 @@ class Options extends Field {
     }
   }
 
-  _render() {
+  _render(el, attrs) {
     const options = this.props.options || [];
     let renderedOptions = options.map((option) => {
       return this.optionRenderFunc(this, option, this.state.value.indexOf(option.value) !== -1);
     });
-    return this.wrapperRenderFunc(this, renderedOptions);
+    return this.wrapperRenderFunc(this, renderedOptions, attrs);
   }
 }
 export default Options;

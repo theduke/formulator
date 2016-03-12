@@ -3,11 +3,14 @@ import Field from "./field";
 
 class TextArea extends Field {
 
-  _render() {
-    const attrs = {
+	buildAttributes() {
+		return {
       name: this.props.name,
       disabled: this.props.disabled,
     };
+	}
+
+  _render(el, attrs) {
     return (<textarea {...attrs}>{this.state.value}</textarea>);
   }
 }

@@ -47,7 +47,7 @@ class Field extends Element {
   }
 
   render() {
-    let content = this.renderFunc(this);
+    let content = this.renderFunc(this, this.buildAttribtes());
     if (this.fieldsetRenderFunc) {
       content = this.fieldsetRenderFunc(this, content); 
     }

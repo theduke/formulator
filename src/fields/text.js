@@ -9,13 +9,16 @@ class Text extends Field {
     placeholder: "",
   }
 
-  _render() {
-    const attrs = {
+  buildAttributes() {
+    return {
       name: this.props.name,
       disabled: this.props.disabled,
       placeholder: this.props.placeholder,
       value: this.state.value,
     };
+  }
+
+  _render(el, attrs) {
     return (<input {...attrs} />);
   }
 }

@@ -3,13 +3,16 @@ import Field from "./field";
 
 class CheckBox extends Field {
 
-  _render() {
-    const attrs = {
+  buildAttributes() {
+    return {
       name: this.props.name,
       disabled: this.props.disabled,
       type: "checkbox",
       checked: this.state.value
     };
+  }
+
+  _render(el, attrs) {
     return (<input {...attrs} />);
   }
 
