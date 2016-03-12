@@ -1,2 +1,2 @@
 
-import "./formulator";
+module.exports = require("./formulator");

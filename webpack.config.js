@@ -27,8 +27,8 @@ module.exports = {
         exclude: /(node_modules|bower_components)/,
         loader: "babel",
         query: {
+          plugins: ["transform-object-rest-spread", "transform-class-properties"],
           presets: ["react", "es2015"],
-          plugins: ["transform-class-properties"]
         }
       }
     ]

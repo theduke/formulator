@@ -1,45 +1,26 @@
 import Formulator from "./formulator";
-
-class Element {
-	static defaultProps = {
-		tpl: null,
-		label: null,
-		autoValidate: true,
-		help: ""
-	}
-
-	constructor(props) {
-		super(props);
-
-		// If autovalidate is not set explicitly, copy from parent.
-		if (!('autoValidate' in props) && 'form' in this.context) {
-			this.props.autoValidate = this.context.props.autoValidate;
-		}
-
-		// Determine render function.
-		const renderFunc = Formulator.getTpl(props.tpl) || this._render;
-		if (!renderFunc) {
-			throw new Error(`Formulator: Could not determine render function for '${this.constructor.name}' - no _render() func`);
-		}
-		this.renderFunc = renderFunc.bind(this);
-
-		this.state = {
-			isValid: null,
-			value: null
-		};
-	}
-
-	render() {
-		return this.renderFunc();
-	}
-}
+import Element from "./element";
+import React from "react";
 
 class Form extends Element {
 
+	static defaultProps = {
+		...Element.defaultProps,
+		submitBtn: "Submit",
+		resetBtn: "Reset",	
+	};
+
 	_render() {
+		let submit = this.props.submitBtn ? <input type="submit" value={this.props.submitBtn} /> : null;
+		let reset = this.props.resetBtn ? <input type="button" value={this.props.resetBtn} /> : null;
+		let buttons = (!submit && !reset) ? null : <fieldset>{reset}{submit}</fieldset>;
+		let label = this.props.label ? <h3 className="form-label">{this.props.label}</h3> : null;
+
 		return (
 			<form>
+				{label}
 				{this.props.children}
+				{buttons}
 			</form>
 		);
 	}

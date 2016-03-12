@@ -1,3 +1,16 @@
+import ReactDom from "react-dom";
+import React from "react";
+
+import Element from "./element";
+import Form from "./form";
+import Text from "./fields/text";
+import TextArea from "./fields/textarea";
+import CheckBox from "./fields/checkbox";
+import CheckBoxes from "./fields/checkboxes";
+import Radios from "./fields/radios";
+import Select from "./fields/select";
+
+import bs4 from "./themes/bs4";
 
 class Formulator {
 	themes = {}
@@ -34,4 +47,34 @@ class Formulator {
 	}
 }
 
-export default new Formulator();
+var formulator = new Formulator();
+
+export {Element, Form, Text};
+
+export default formulator;
+
+window.FormulatorTest = function() {
+	formulator.registerTheme("bs4", bs4);
+
+	const options = [
+		{value: "a", label: "A"},
+		{value: "b", label: "B"},
+		{value: "c", label: "C", disabled: true},
+		{value: "d", label: "D"},
+	];
+
+	ReactDom.render(
+		(
+			<Form name="bla" label="Form">
+				<Text name="test" label="Test" required placeholder="Enter text..." help="Help text" />
+				<TextArea name="text" label="Area" />
+				<CheckBox name="check" label="Checkbox" value="1" />
+				<CheckBoxes name="checks" label="Checks" options={options} />
+				<Radios name="radios" label="Radios" options={options} />
+				<Select name="select" label="Select" options={options} />
+				<Select name="select-multi" label="Select" options={options} multi={true} />
+			</Form>
+		),
+		document.getElementById("test")
+	)
+}
